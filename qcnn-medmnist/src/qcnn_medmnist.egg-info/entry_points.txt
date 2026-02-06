@@ -1,7 +1,0 @@
-[console_scripts]
-qcnn-benchmark = qcnn_medmnist.scripts.benchmark:cli
-qcnn-heatmap = qcnn_medmnist.scripts.heatmap:cli
-qcnn-plot-curves = qcnn_medmnist.scripts.plot_curves:cli
-qcnn-preprocess = qcnn_medmnist.scripts.preprocess:cli
-qcnn-report = qcnn_medmnist.scripts.report:cli
-qcnn-train = qcnn_medmnist.scripts.train:cli

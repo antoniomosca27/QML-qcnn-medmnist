@@ -1,0 +1,66 @@
+[project]
+name = "qcnn-medmnist"
+version = "0.1.0"
+description = "Hybrid quantum-classical convolutional pipeline for medMNIST with Qiskit and PyTorch."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "Leonardo Tomei", email = "l.tomei9@studenti.unipi.it" },
+  { name = "Antonio Mosca", email = "a.mosca7@studenti.unipi.it" }
+]
+keywords = ["quantum machine learning", "qcnn", "medmnist", "qiskit", "pytorch"]
+dependencies = [
+  "qiskit>=1.0",
+  "qiskit-aer>=0.14",
+  "torch>=2.2",
+  "torchvision>=0.17",
+  "numpy>=1.26",
+  "pandas>=2.1",
+  "scikit-learn>=1.5",
+  "loguru>=0.7",
+  "matplotlib>=3.8",
+  "medmnist>=2.2.3",
+  "tqdm>=4.66",
+  "seaborn>=0.13.2"
+]
+
+[project.optional-dependencies]
+dev = [
+  "black>=24.3",
+  "isort>=5.13",
+  "pre-commit>=3.7",
+  "pytest>=8.0",
+  "pytest-cov>=5.0"
+]
+
+[project.scripts]
+qcnn-preprocess = "src.scripts.preprocess:cli"
+qcnn-train = "src.scripts.train:cli"
+qcnn-report = "src.scripts.report:cli"
+qcnn-heatmap = "src.scripts.heatmap:cli"
+qcnn-plot-curves = "src.scripts.plot_curves:cli"
+
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "." }
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src", "src.*"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+src_paths = ["src", "tests"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]

@@ -1,0 +1,50 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Notebook artifacts
+.ipynb_checkpoints/
+*-checkpoint.*
+
+# Build and packaging artifacts
+build/
+dist/
+.eggs/
+*.egg-info/
+pip-wheel-metadata/
+
+# Virtual environments and local environment files
+.venv/
+.venv_check/
+venv/
+.env
+.env.*
+.python-version
+
+# Test and lint caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage*
+htmlcov/
+
+# Operating system and editor artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Runtime data and outputs
+data/raw/
+data/processed/
+logs/*
+!logs/.gitkeep
+reports/*
+!reports/.gitkeep
+
+# Model and tensor artifacts
+*.pt
+*.pth
+*.npz
+*.npy

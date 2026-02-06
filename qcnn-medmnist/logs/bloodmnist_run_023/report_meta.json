@@ -1,6 +1,0 @@
-{
-  "dataset": "bloodmnist",
-  "stride": 2,
-  "n_qubit": 2,
-  "depth": 4
-}
