@@ -1,10 +1,10 @@
-# QML-QCNN
+# QML-qcnn-medmnist
 
-[![CI](https://github.com/antoniomosca27/QML-QCNN/actions/workflows/ci.yml/badge.svg)](https://github.com/antoniomosca27/QML-QCNN/actions/workflows/ci.yml)
+[![CI](https://github.com/antoniomosca27/QML-qcnn-medmnist/actions/workflows/ci.yml/badge.svg)](https://github.com/antoniomosca27/QML-qcnn-medmnist/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-QML-QCNN implements a hybrid quantum-classical convolution pipeline for medMNIST classification using Qiskit and PyTorch. The workflow preprocesses medMNIST images, extracts patch-level quantum features, and trains a compact classifier. The project includes command-line interfaces for preprocessing, training, report generation, heatmap visualization, and learning-curve plotting. A notebook is provided for end-to-end reproducible execution.
+QML-qcnn-medmnist implements a hybrid quantum-classical convolution pipeline for medMNIST classification using Qiskit and PyTorch. The workflow preprocesses medMNIST images, extracts patch-level quantum features, and trains a compact classifier. The project includes command-line interfaces for preprocessing, training, report generation, heatmap visualization, and learning-curve plotting. A notebook is provided for end-to-end reproducible execution.
 
 ## Installation
 ```bash
@@ -25,7 +25,7 @@ qcnn-plot-curves --logdir logs/bloodmnist_run_001
 ## Repository Layout
 - `src/`: Python package source (`src.datasets`, `src.models`, `src.quantum`, `src.scripts`, `src.training`, `src.utils`).
 - `tests/`: automated test suite.
-- `notebooks/qcnn_medmnist_pipeline.ipynb`: end-to-end workflow notebook.
+- `notebooks/QML-qcnn-medmnist_pipeline.ipynb`: end-to-end workflow notebook.
 - `pyproject.toml`: package metadata, dependencies, and CLI entry points.
 
 ## Runtime Outputs
@@ -43,3 +43,6 @@ qcnn-plot-curves --logdir logs/bloodmnist_run_001
 
 ## Dataset Acknowledgment
 This project uses [medMNIST](https://medmnist.com/). Datasets are downloaded at runtime and are not tracked in version control.
+
+## License
+This project is licensed under the MIT License.

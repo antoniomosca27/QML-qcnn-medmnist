@@ -1,13 +1,13 @@
 [project]
-name = "qcnn-medmnist"
+name = "QML-qcnn-medmnist"
 version = "0.1.0"
 description = "Hybrid quantum-classical convolutional pipeline for medMNIST with Qiskit and PyTorch."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [
-  { name = "Leonardo Tomei", email = "l.tomei9@studenti.unipi.it" },
-  { name = "Antonio Mosca", email = "a.mosca7@studenti.unipi.it" }
+  { name = "Antonio Mosca", email = "a.mosca7@studenti.unipi.it" },
+  { name = "Leonardo Tomei", email = "l.tomei9@studenti.unipi.it" }
 ]
 keywords = ["quantum machine learning", "qcnn", "medmnist", "qiskit", "pytorch"]
 dependencies = [
