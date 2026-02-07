@@ -4,9 +4,25 @@
 [![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11-blue)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-QML-qcnn-medmnist implements a hybrid quantum-classical convolution pipeline for medMNIST classification using Qiskit and PyTorch. The workflow preprocesses medMNIST images, extracts patch-level quantum features, and trains a compact classifier. The project includes command-line interfaces for preprocessing, training, report generation, heatmap visualization, and learning-curve plotting. A notebook is provided for end-to-end reproducible execution.
+This repository provides the reference implementation for a **hybrid quantum–classical convolutional neural network (QCNN)** applied to **medMNIST image classification**, developed as a project for the **Quantum Machine Learning** course. The project is authored by **Antonio Mosca** and **Leonardo Tomei**.
 
+The code implements a patch-based quantum feature extraction pipeline using **Qiskit**, combined with classical training and evaluation using **PyTorch**. The repository is designed to support **reproducible experimentation**, command-line execution, and structured reporting.
+
+---
+
+## Scope
+
+- Target datasets are from the **medMNIST** benchmark (e.g. `bloodmnist`).
+- Images are preprocessed into local patches processed by quantum circuits.
+- Quantum features are extracted at patch level and aggregated into a compact classifier.
+- Training, evaluation, and visualization are handled via modular CLIs.
+- The pipeline supports deterministic execution via explicit seeding.
+
+---
 ## Installation
+
+Create and activate a virtual environment, then install the package in editable mode:
+
 ```bash
 python -m venv .venv
 source .venv/bin/activate
@@ -14,6 +30,9 @@ pip install -e ".[dev]"
 ```
 
 ## Quickstart
+
+End-to-end execution using the provided command-line interfaces:
+
 ```bash
 qcnn-preprocess --dataset bloodmnist
 qcnn-train --dataset bloodmnist --epochs 5 --stride 3
@@ -50,6 +69,11 @@ For `--logdir`, all analysis CLIs accept either:
 
 ## Dataset Acknowledgment
 This project uses [medMNIST](https://medmnist.com/). Datasets are downloaded at runtime and are not tracked in version control.
+
+## Authors
+
+- Antonio Mosca
+- Leonardo Tomei
 
 ## License
 This project is licensed under the MIT License.
