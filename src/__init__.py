@@ -1,4 +1,4 @@
-"""Top-level package for the src project."""
+"""Top-level package for the QML-qcnn-medmnist project."""
 
 from importlib.metadata import PackageNotFoundError, version
 

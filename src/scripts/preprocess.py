@@ -85,7 +85,7 @@ def train_color2gray(
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 
     model.to(device)
-    best_state = model.state_dict()
+    best_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
     best_val_loss = float("inf")
 
     for epoch in range(1, epochs + 1):
@@ -117,7 +117,7 @@ def train_color2gray(
         )
         if val_loss < best_val_loss:
             best_val_loss = val_loss
-            best_state = model.state_dict()
+            best_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
 
     model.load_state_dict(best_state)
     return model

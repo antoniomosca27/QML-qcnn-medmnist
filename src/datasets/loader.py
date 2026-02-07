@@ -69,8 +69,9 @@ def download_medmnist(
     name : str, default="pathmnist"
         medMNIST dataset identifier.
     root : str | Path | None, optional
-        Download root directory. If omitted, uses
-        ``<project_root>/data/raw``.
+        Download root directory (raw data directory). If omitted, uses
+        ``<project_root>/data/raw``. When provided, this path is used as-is
+        without appending additional subdirectories.
 
     Returns
     -------
@@ -90,7 +91,7 @@ def download_medmnist(
         available = ", ".join(sorted(INFO))
         raise ValueError(f"Unknown medMNIST dataset '{name}'. Available datasets: {available}.")
 
-    root_path = resolve_raw_data_dir(root)
+    root_path = resolve_raw_data_dir() if root is None else Path(root).expanduser().resolve()
     root_path.mkdir(parents=True, exist_ok=True)
 
     data_class = getattr(medmnist, INFO[name]["python_class"])

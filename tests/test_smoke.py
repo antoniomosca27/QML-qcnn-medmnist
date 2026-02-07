@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import importlib.util
 import sys
 from pathlib import Path
 
@@ -14,7 +13,9 @@ from src.training import trainer as trainer_module
 from src.training.evaluate import classification_metrics
 from src.utils.seed import set_global_seed
 
-QISKIT_AVAILABLE = importlib.util.find_spec("qiskit") is not None
+
+def _require_qiskit() -> None:
+    pytest.importorskip("qiskit", reason="qiskit is not installed")
 
 
 def test_image_to_patches_shapes() -> None:
@@ -34,8 +35,9 @@ def test_image_to_patches_shapes() -> None:
         image_to_patches(img, stride=0)
 
 
-@pytest.mark.skipif(not QISKIT_AVAILABLE, reason="qiskit is not installed")
 def test_qconv_block_qubits_and_parameter_counts() -> None:
+    _require_qiskit()
+
     from src.quantum.qconv import qconv_block, qconv_block3
 
     circuit2, theta2 = qconv_block()
@@ -127,8 +129,8 @@ def test_trainer_run_epoch_single_forward_per_batch(
 def test_cli_help_invocation(
     module_name: str, program_name: str, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    if not QISKIT_AVAILABLE and module_name != "src.scripts.preprocess":
-        pytest.skip("qiskit is not installed")
+    if module_name != "src.scripts.preprocess":
+        _require_qiskit()
 
     module = __import__(module_name, fromlist=["cli"])
     monkeypatch.setattr(sys, "argv", [program_name, "--help"])

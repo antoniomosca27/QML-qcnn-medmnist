@@ -9,11 +9,12 @@ def qpool_block() -> QuantumCircuit:
     Returns
     -------
     qiskit.QuantumCircuit
-        Circuit that measures qubit 1 and conditionally applies ``X`` on qubit 0.
+        Circuit that measures qubit 1 and conditionally applies ``X`` on qubit 0
+        when the classical outcome is 1.
     """
     qc = QuantumCircuit(2, 1, name="QPool")
     qc.measure(1, 0)
-    qc.x(0).c_if(0, 1)
+    qc.x(0).c_if(qc.cregs[0], 1)
     return qc
 
 
@@ -23,11 +24,14 @@ def qpool_block3() -> QuantumCircuit:
     Returns
     -------
     qiskit.QuantumCircuit
-        Circuit that measures qubits 1 and 2 and conditionally applies ``X`` on qubit 0.
+        Circuit that measures qubits 1 and 2 and conditionally applies ``X`` on qubit 0
+        when at least one measured classical bit is 1.
     """
     qc = QuantumCircuit(3, 2, name="QPool3")
     qc.measure(1, 0)
     qc.measure(2, 1)
-    qc.x(0).c_if(0, 1)
-    qc.x(0).c_if(1, 1)
+    creg = qc.cregs[0]
+    qc.x(0).c_if(creg, 1)
+    qc.x(0).c_if(creg, 2)
+    qc.x(0).c_if(creg, 3)
     return qc

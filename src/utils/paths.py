@@ -21,7 +21,8 @@ def resolve_project_root(project_root: PathLike | None = None) -> Path:
     Returns
     -------
     Path
-        Absolute path to the project root.
+        Absolute path to the project root. The fallback repository inference
+        resolves to the repository directory that contains ``pyproject.toml``.
     """
     if project_root is not None:
         return Path(project_root).expanduser().resolve()
@@ -30,7 +31,7 @@ def resolve_project_root(project_root: PathLike | None = None) -> Path:
     if env_root:
         return Path(env_root).expanduser().resolve()
 
-    return Path(__file__).resolve().parents[3]
+    return Path(__file__).resolve().parents[2]
 
 
 def resolve_data_dir(
@@ -124,14 +125,30 @@ def resolve_processed_data_dir(
 
 
 def resolve_run_dir(logdir: PathLike, logs_dir: PathLike | None = None) -> Path:
-    """Resolve a run directory from an absolute or relative identifier.
+    """Resolve a run directory path with deterministic precedence.
 
     Parameters
     ----------
     logdir : str | Path
         Run directory path or name.
+
+        Supported forms:
+        - absolute path (for example ``/abs/path/to/logs/bloodmnist_run_001``);
+        - run folder name (for example ``bloodmnist_run_001``);
+        - relative path prefixed by the logs directory name
+          (for example ``logs/bloodmnist_run_001`` when ``logs_dir`` ends with
+          ``/logs``);
+        - other relative paths with subdirectories.
     logs_dir : str | Path | None, optional
-        Base logs directory used when ``logdir`` is relative.
+        Base logs directory used when ``logdir`` is relative. If provided,
+        relative ``logdir`` values are resolved using this precedence:
+
+        1. If the first component of ``logdir`` matches ``logs_dir.name``,
+           interpret ``logdir`` as relative to ``logs_dir.parent``.
+        2. Else if ``logdir`` is a simple folder name, append it to
+           ``logs_dir``.
+        3. Else resolve ``logdir`` from the current working directory without
+           prepending ``logs_dir``.
 
     Returns
     -------
@@ -140,9 +157,17 @@ def resolve_run_dir(logdir: PathLike, logs_dir: PathLike | None = None) -> Path:
     """
     candidate = Path(logdir).expanduser()
     if candidate.is_absolute():
-        return candidate
+        return candidate.resolve()
 
     if logs_dir is not None:
-        return Path(logs_dir).expanduser().resolve() / candidate
+        base_logs = Path(logs_dir).expanduser().resolve()
+
+        if candidate.parts and candidate.parts[0] == base_logs.name:
+            return (base_logs.parent / candidate).resolve()
+
+        if candidate.parent == Path("."):
+            return (base_logs / candidate).resolve()
+
+        return candidate.resolve()
 
     return candidate.resolve()

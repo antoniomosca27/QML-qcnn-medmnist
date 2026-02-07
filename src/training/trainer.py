@@ -258,12 +258,16 @@ class Trainer:
 
             if val_loss < self.best_val_loss:
                 self.best_val_loss = val_loss
-                self.best_state = self.model.state_dict()
+                self.best_state = {
+                    key: value.detach().cpu().clone()
+                    for key, value in self.model.state_dict().items()
+                }
                 torch.save(self.best_state, self.out_dir / "best_model.pt")
                 log.info(f"Saved new best model with val_loss={val_loss:.4f}.")
 
         if self.best_state is None:
             raise RuntimeError("Training finished without producing a best checkpoint.")
+        self.model.load_state_dict(self.best_state)
 
     def test(self) -> dict[str, float]:
         """Evaluate the best checkpoint on the test split.
