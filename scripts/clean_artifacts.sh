@@ -6,5 +6,6 @@ cd "${repo_root}"
 
 find . -type d -name ".pytest_cache" -prune -exec rm -rf {} +
 find . -type d -name "__pycache__" -prune -exec rm -rf {} +
+find . -type f -name "*.pyc" -delete
 
-echo "Removed .pytest_cache and __pycache__ directories."
+echo "Removed .pytest_cache, __pycache__, and *.pyc artifacts."

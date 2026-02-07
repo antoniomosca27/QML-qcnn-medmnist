@@ -12,7 +12,10 @@ from torch import nn
 from torch.utils.data import DataLoader, TensorDataset
 from tqdm import tqdm
 
-from src.models.hybrid_qcnn import HybridQCNN
+try:
+    from src.models.hybrid_qcnn import HybridQCNN
+except ImportError:  # pragma: no cover
+    HybridQCNN = None  # type: ignore[assignment]
 from src.training.evaluate import classification_metrics
 from src.utils.logging import get_logger
 from src.utils.paths import resolve_processed_data_dir
@@ -159,6 +162,12 @@ class Trainer:
         labels = base_dataset.tensors[1]
         n_classes = int(labels.max().item() + 1)
         log.info(f"Detected {n_classes} classes from preprocessed tensors.")
+
+        if HybridQCNN is None:
+            raise ImportError(
+                "HybridQCNN requires qiskit/qiskit-aer. Install project dependencies "
+                "(pip install -e '.[dev]') or install qiskit and qiskit-aer explicitly."
+            )
 
         self.model: nn.Module = HybridQCNN(n_classes=n_classes, stride=stride).to(device)
         if freeze_q:
