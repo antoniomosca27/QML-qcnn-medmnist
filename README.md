@@ -8,6 +8,8 @@ This repository provides the reference implementation for a **hybrid quantum–c
 
 The code implements a patch-based quantum feature extraction pipeline using **Qiskit**, combined with classical training and evaluation using **PyTorch**. The repository is designed to support **reproducible experimentation**, command-line execution, and structured reporting.
 
+**Exam report:** [`QML-exam.report.pdf`](QML-exam.report.pdf) is the report of the project presented for the QML exam and includes an in-depth discussion of architecture and results.
+
 ---
 
 ## Scope
@@ -49,6 +51,7 @@ For `--logdir`, all analysis CLIs accept either:
 - `src/`: Python package source (`src.datasets`, `src.models`, `src.quantum`, `src.scripts`, `src.training`, `src.utils`).
 - `tests/`: automated test suite.
 - `notebooks/QML-qcnn-medmnist_pipeline.ipynb`: end-to-end workflow notebook.
+- `QML-exam.report.pdf`: project exam report document.
 - `pyproject.toml`: package metadata, dependencies, and CLI entry points.
 
 ## Runtime Outputs
