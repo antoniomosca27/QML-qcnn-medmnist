@@ -23,7 +23,7 @@ The code implements a patch-based quantum feature extraction pipeline using **Qi
 ---
 ## Installation
 
-Create and activate a virtual environment, then install the package in editable mode:
+Create and activate a virtual environment, then install the packages in editable mode:
 
 ```bash
 python -m venv .venv
